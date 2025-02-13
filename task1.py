@@ -23,13 +23,9 @@ Jen Mezei       jen@shaw.ca     6042231134      104     891 Cullen Cresc        
 file = 'dbase.db'
 connection = sqlite3.connect(file)
 print(connection)
-
 cursor = connection.cursor()
-cursor.execute('schema customers;')
-result = cursor.fetchall()
-print(result)
 
-query ="""CREATE TABLE if not exists customers (
+query ="""CREATE TABLE if not exists vetcustomers (
     id integer primary key autoincrement,
     oName tinytext,
     oEmail tinytext,
@@ -38,7 +34,10 @@ query ="""CREATE TABLE if not exists customers (
     address tinytext,
     balance int);"""
 cursor.execute(query)
-cursor.fetchall()
+connection.commit()
+
+cursor.execute('PRAGMA table_info(vetcustomers);') #name of table is vetcustomers
+print(cursor.fetchall())
 
 data = [
     ['Joe Smith',    'joe@gmail.com','7783341111',101,'1234 Sesame Street',0],
@@ -47,9 +46,13 @@ data = [
     ['Jen Mezei',    'jen@shaw.ca',  '6042231134',104,'891 Cullen Cresc',  0]]
 
 for i in data:
-    query = f"insert into customers (oName,oEmail,oPhoneNum,oID,address,balance) values ('{i[0]}','{i[1]}','{i[2]}',{i[3]},'{i[4]}',{i[5]});"
-    print(query)
+    query = f"insert into vetcustomers (oName,oEmail,oPhoneNum,oID,address,balance) values ('{i[0]}','{i[1]}','{i[2]}',{i[3]},'{i[4]}',{i[5]});"
+    #print(query)
     cursor.execute(query)
-    cursor.fetchall()
-
-
+connection.commit()
+query = "select * from vetcustomers"
+cursor.execute(query)
+result = cursor.fetchall()
+print(result)
+for i in result:
+    print(i)

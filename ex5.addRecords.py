@@ -6,7 +6,7 @@ connection = sqlite3.connect(file)
 print(connection)
 
 cursor = connection.cursor()
-cursor.execute('delete from customers') 
+cursor.execute('delete from customers;') 
 #note, you don't want to delete the table data regularly, this is just for demo purposes
 data = [
     ['Joe Mantenga','joe@sdss.ca',12345],

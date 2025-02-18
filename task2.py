@@ -40,7 +40,7 @@ cursor.execute(query)
 connection.commit()
 
 cursor.execute('PRAGMA table_info(vetcustomerst2);') #name of table is vetcustomers
-print(cursor.fetchall())
+#print(cursor.fetchall())
 
 data = [
     ['Fluffy','dog','Pomeraniam',5,'m','true',101],
@@ -50,13 +50,13 @@ data = [
     ['Copper','dog','Beagle',12,'m','true',104]]
 
 for i in data:
-    query = f"insert into vetcustomerst2 (name,species,oPhoneNum,oID,address,balance) values ('{i[0]}','{i[1]}','{i[2]}',{i[3]},'{i[4]}',{i[5]});"
+    query = f"insert into vetcustomerst2 (name,species,breed,age,gender,sn,oID) values ('{i[0]}','{i[1]}','{i[2]}',{i[3]},'{i[4]}','{i[5]}','{i[6]}');"
     #print(query)
     cursor.execute(query)
 connection.commit()
 query = "select * from vetcustomerst2"
 cursor.execute(query)
 result = cursor.fetchall()
-print(result)
+#print(result)
 for i in result:
     print(i)
